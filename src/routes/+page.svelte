@@ -10,6 +10,26 @@
     quizzes = [...genQuizzes()];
     console.log(quizzes);
   });
+
+  // function handleInput(event: Event) {
+  //   const { target } = event;
+  //   if (!(target instanceof HTMLInputElement)) {
+  //     return;
+  //   }
+  //   ownSolution = target?.value;
+  // }
+
+  function handleNext(event: Event) {
+    quizzes = quizzes.map((quiz, i) => {
+      if (i === solutionID) {
+        return { ...quiz, ownSolution };
+      }
+      return quiz;
+    });
+    solutionID = solutionID + 1;
+    ownSolution = '';
+    console.log(quizzes);
+  }
 </script>
 
 <header class="header">
@@ -41,8 +61,8 @@
         <h1 class="quiz-title">Loading...</h1>
       {/if}
       <div class="input-group">
-        <input type="text" on:input={(e) => console.log(e)} />
-        <button class="button">Next</button>
+        <input type="text" bind:value={ownSolution} />
+        <button class="button" on:click={handleNext}>Next</button>
       </div>
     </div>
   </section>

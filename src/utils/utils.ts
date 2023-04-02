@@ -1,26 +1,13 @@
 export interface Quiz {
-  id: string;
+  id: number;
   left: number;
   right: number;
   op: string;
-  solution: number;
-  ownSolution: number;
+  solution: string;
+  ownSolution: string;
 }
 
 const ops = ['&', '|', '^', '<<', '>>'];
-
-function genID(): string {
-  let random;
-  let id = '';
-  for (let i = 0; i < 32; i++) {
-    random = (Math.random() * 16) | 0;
-    if (i === 8 || i === 12 || i === 16 || i === 20) {
-      id += '-';
-    }
-    id += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
-  }
-  return id;
-}
 
 export function genQuizzes(): Quiz[] {
   const quizzes: Quiz[] = [];
@@ -28,28 +15,35 @@ export function genQuizzes(): Quiz[] {
     const op = ops[Math.floor(Math.random() * ops.length)];
     const left = Math.floor(Math.random() * 5);
     const right = Math.floor(Math.random() * 5);
-    let solution = 0;
+    let solution = '';
     switch (op) {
       case '&':
-        solution = left & right;
+        solution = (left & right).toString();
         break;
       case '|':
-        solution = left | right;
+        solution = (left | right).toString();
         break;
       case '^':
-        solution = left ^ right;
+        solution = (left ^ right).toString();
         break;
       case '<<':
-        solution = left << right;
+        solution = (left << right).toString();
         break;
       case '>>':
-        solution = left >> right;
+        solution = (left >> right).toString();
         break;
     }
-    if (solution === 0) {
+    if (solution === '0') {
       continue;
     }
-    const quiz = { id: genID(), left, right, op, solution, ownSolution: 0 };
+    const quiz = {
+      id: quizzes.length,
+      left,
+      right,
+      op,
+      solution,
+      ownSolution: '',
+    };
     quizzes.push(quiz);
   }
 
