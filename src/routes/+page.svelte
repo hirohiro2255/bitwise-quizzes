@@ -11,13 +11,14 @@
     console.log(quizzes);
   });
 
-  // function handleInput(event: Event) {
-  //   const { target } = event;
-  //   if (!(target instanceof HTMLInputElement)) {
-  //     return;
-  //   }
-  //   ownSolution = target?.value;
-  // }
+  function handleInput(event: Event) {
+    const { target } = event;
+    if (!(target instanceof HTMLInputElement)) {
+      return;
+    }
+    ownSolution = target?.value;
+    console.log(ownSolution);
+  }
 
   function handleNext(event: Event) {
     quizzes = quizzes.map((quiz, i) => {
@@ -43,89 +44,102 @@
 </header>
 
 <main class="container">
-  <section class="quiz-container">
-    <nav>
-      <ul>
-        <li>{solutionID + 1} / {quizzes.length}</li>
-        <li><i class="fa-solid fa-calculator" /></li>
-      </ul>
-    </nav>
-    <div class="quiz-interaction-group">
-      {#if quizzes.length !== 0}
-        {#each quizzes as quiz, i}
-          {#if i === solutionID}
-            <h1 class="quiz-title">{quiz.left} {quiz.op} {quiz.right} = ?</h1>
-          {/if}
-        {/each}
-      {:else}
-        <h1 class="quiz-title">Loading...</h1>
-      {/if}
-      <div class="input-group">
-        <input type="text" bind:value={ownSolution} />
-        <button class="button" on:click={handleNext}>Submit</button>
+  <nav class="nav">
+    <ul class="quiz-list">
+      <li class="quiz-list-item">{solutionID + 1} / {quizzes.length}</li>
+      <!-- <li><i class="fa-solid fa-calculator" /></li> -->
+    </ul>
+  </nav>
+  <section class="quiz-interaction-group">
+    {#if quizzes.length !== 0}
+      {#each quizzes as quiz, i}
+        {#if i === solutionID}
+          <h1 class="quiz-title">{quiz.left} {quiz.op} {quiz.right} = ?</h1>
+        {/if}
+      {/each}
+    {:else}
+      <h1 class="quiz-title loading">Loading...</h1>
+    {/if}
+    <div class="input-group">
+      <div class="helper-group">
+        <button class="hint">Hint</button>
+      </div>
+      <input type="text" bind:value={ownSolution} />
+      <div>
+        <button class="skip">Skip</button>
+        <button class="submit" on:click={handleNext}>Submit</button>
       </div>
     </div>
   </section>
-  <!-- <section class="result-container">
-    <h2>Result:</h2>
-  </section> -->
 </main>
 
 <style>
+  .header {
+    visibility: hidden;
+  }
   .nav-list {
     display: flex;
   }
 
+  .nav {
+    /* padding-top: 2.5em; */
+    padding-bottom: 3.5em;
+  }
+
+  .quiz-list {
+    display: flex;
+    justify-content: center;
+  }
+
+  .quiz-list-item {
+    font-size: 1.5rem;
+  }
+
   .container {
-    display: flex;
-    height: 83%;
-    margin-top: 1.2rem;
-  }
-
-  .quiz-container {
-    flex: 5;
-    border: 1px solid red;
-    /* display: flex;
-    flex-direction: column; */
-    /* justify-content: space-between; */
-  }
-
-  .quiz-container nav {
-    height: 10%;
-  }
-
-  .quiz-container nav ul {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
+    box-shadow: 0px 20px 30px -5px hsla(230, 29%, 61%, 0.15);
+    background-color: white;
+    border-radius: 10px;
+    width: min(87%, 650px);
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 2em;
+    padding-bottom: 4em;
   }
 
   .quiz-interaction-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 8rem;
+    gap: 3.8rem;
   }
 
   .quiz-title {
-    font-size: 3.2rem;
+    font-size: 3rem;
     color: #434146;
   }
 
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    width: 40%;
+  .hint {
+    background-color: #ffbb5c;
+    color: white;
   }
 
-  .input-group input {
+  .input-group {
+    width: min(220px, 60%);
+  }
+
+  /* .input-group input {
     height: 2.5rem;
     font-size: 1.5rem;
     text-align: center;
     border-radius: 0.6rem;
+  } */
+
+  .skip {
+    background-color: #ef6262;
+    color: white;
   }
-  .input-group button {
+
+  .submit {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-top: 1rem;
@@ -134,10 +148,5 @@
     color: #fff;
     background-color: #4caf50;
     border: 1px solid #4caf50;
-  }
-
-  .result-container {
-    flex: 3;
-    border: 1px solid blue;
   }
 </style>

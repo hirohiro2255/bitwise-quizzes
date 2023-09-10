@@ -8,8 +8,6 @@ h1, h2, h3, p, ul {
 }
 
 body {
-  background-color: #eef1f0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  background-color: #f5f5f5;
+  min-width: 320px;
 }
