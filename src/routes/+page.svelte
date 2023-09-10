@@ -62,13 +62,13 @@
       {/if}
       <div class="input-group">
         <input type="text" bind:value={ownSolution} />
-        <button class="button" on:click={handleNext}>Next</button>
+        <button class="button" on:click={handleNext}>Submit</button>
       </div>
     </div>
   </section>
-  <section class="result-container">
+  <!-- <section class="result-container">
     <h2>Result:</h2>
-  </section>
+  </section> -->
 </main>
 
 <style>
@@ -110,6 +110,30 @@
   .quiz-title {
     font-size: 3.2rem;
     color: #434146;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 40%;
+  }
+
+  .input-group input {
+    height: 2.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 0.6rem;
+  }
+  .input-group button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    border-radius: 0.6rem;
+    color: #fff;
+    background-color: #4caf50;
+    border: 1px solid #4caf50;
   }
 
   .result-container {
