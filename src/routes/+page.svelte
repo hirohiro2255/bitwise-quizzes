@@ -156,17 +156,18 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-top: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     border-radius: 0.6rem;
-    color: #fff;
-    background-color: #ef6262;
-    border: 1px solid #ef6262;
-    color: white;
+    color: #4caf50;
+    background-color: transparent;
+    border: 2px solid #4caf50;
   }
 
   .skip:hover {
     cursor: pointer;
     opacity: 0.8;
+    color: white;
+    background-color: #4caf50;
     transition: ease-in 0.2s;
   }
 
@@ -174,7 +175,7 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-top: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     border-radius: 0.6rem;
     color: #fff;
     background-color: #4caf50;
