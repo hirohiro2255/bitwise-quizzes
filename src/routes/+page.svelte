@@ -8,7 +8,6 @@
 
   onMount(() => {
     quizzes = [...genQuizzes()];
-    console.log(quizzes);
   });
 
   function handleInput(event: Event) {
@@ -17,7 +16,6 @@
       return;
     }
     ownSolution = target?.value;
-    console.log(ownSolution);
   }
 
   function handleNext(event: Event) {
@@ -29,7 +27,6 @@
     });
     solutionID = solutionID + 1;
     ownSolution = '';
-    console.log(quizzes);
   }
 </script>
 
@@ -62,10 +59,10 @@
     {/if}
     <div class="input-group">
       <div class="helper-group">
-        <button class="hint">Hint</button>
+        <button disabled class="hint">Hint</button>
       </div>
-      <input type="text" bind:value={ownSolution} />
-      <div>
+      <input class="solution-input" type="text" bind:value={ownSolution} />
+      <div class="button-group">
         <button class="skip">Skip</button>
         <button class="submit" on:click={handleNext}>Submit</button>
       </div>
@@ -118,25 +115,59 @@
     color: #434146;
   }
 
+  .helper-group {
+    text-align: right;
+    margin-bottom: 0.8rem;
+  }
+
   .hint {
     background-color: #ffbb5c;
+    border: 1px solid #ffbb5c;
+    border-radius: 4px;
     color: white;
+  }
+
+  .hint:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: ease-in 0.2s;
   }
 
   .input-group {
     width: min(220px, 60%);
   }
 
-  /* .input-group input {
-    height: 2.5rem;
-    font-size: 1.5rem;
+  .solution-input {
+    width: 100%;
+    font-size: 1.2rem;
+    border-radius: 4px;
     text-align: center;
-    border-radius: 0.6rem;
-  } */
+  }
+
+  .solution-input:focus {
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .skip {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    border-radius: 0.6rem;
+    color: #fff;
     background-color: #ef6262;
+    border: 1px solid #ef6262;
     color: white;
+  }
+
+  .skip:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: ease-in 0.2s;
   }
 
   .submit {
@@ -148,5 +179,11 @@
     color: #fff;
     background-color: #4caf50;
     border: 1px solid #4caf50;
+  }
+
+  .submit:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: ease-in 0.2s;
   }
 </style>
